@@ -1,4 +1,6 @@
 const Format = require('./format');
+const axios = require("axios").default;
+const CObject = require("./CObject");
 /**
  * Software Development Kit for DashaMail
  * @class
@@ -76,6 +78,34 @@ class DashaMail {
      */
     getMethod() {
         return this.method;
+    }
+
+
+    /**
+     * @protected
+     * @param {URLSearchParams} body
+     * @returns {Promise<unknown>}
+     */
+    request(body) {
+        return new Promise((resolve, reject) => {
+            if (!this.apiKey) return reject('apiKey not set');
+            body.set('api_key', this.getApiKey());
+            body.set('method', this.getMethod());
+            body.set('format', this.format);
+            const headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'};
+            axios
+                .post(this.host, body, {headers})
+                .then(response => {
+                    if (response.status === 200) {
+                        const status = CObject.get(response.data, 'response.msg.text');
+                        if (status && status !== 'OK') return reject(status);
+                        else return resolve(response.data);
+                    }
+                    return reject(response.data);
+                }, error => {
+                    return reject(error);
+                });
+        });
     }
 }
 

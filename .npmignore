@@ -2,6 +2,8 @@
 coverage
 config
 test
+CHANGELOG.md
+jest.config.json
 
 # Node
 node_modules

@@ -4,7 +4,9 @@ const DashaMail = require('classes/dashaMail');
  * @class
  */
 class Reports extends DashaMail {
-    get_balance
+
 }
+
+Reports.prototype.name = 'reports';
 
 module.exports = Reports;
