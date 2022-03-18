@@ -1,0 +1,40 @@
+{
+  "name": "dashamail",
+  "version": "0.0.1",
+  "description": "Software Development Kit for DashaMail",
+  "main": "dashaMail.js",
+  "scripts": {
+    "test": "jest --config ./jest.config.json",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/launcelot66/dashamail.git"
+  },
+  "keywords": [
+    "dashamail",
+    "dashamail sdk",
+    "sdk"
+  ],
+  "author": {
+    "email": "lanselot96@gmail.com",
+    "name": "Sereda Nikita",
+    "url": "https://github.com/launcelot66"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/launcelot66/dashamail/issues"
+  },
+  "homepage": "https://github.com/launcelot66/dashamail#readme",
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": ">= 6.9.0"
+  },
+  "dependencies": {
+    "axios": "^0.26.1"
+  },
+  "devDependencies": {
+    "config": "^3.3.7",
+    "jest": "^27.5.1"
+  }
+}
