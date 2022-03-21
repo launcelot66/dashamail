@@ -1,4 +1,4 @@
-const DashaMail = require('classes/dashaMail');
+const DashaMail = require('./dashaMail');
 /**
  * Software Development Kit for DashaMail Campaigns
  * @class

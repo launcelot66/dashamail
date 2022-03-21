@@ -2,21 +2,21 @@ module.exports = {
     /**
      * @class {Transactional}
      */
-    transactional: require('classes/transactional'),
+    transactional: require('./classes/transactional'),
     /**
      * @class {Lists}
      */
-    lists: require('classes/lists'),
+    lists: require('./classes/lists'),
     /**
      * @class {Campaigns}
      */
-    campaigns: require('classes/campaigns'),
+    campaigns: require('./classes/campaigns'),
     /**
      * @class {Reports}
      */
-    reports: require('classes/reports'),
+    reports: require('./classes/reports'),
     /**
      * @class {Account}
      */
-    account: require('classes/account'),
+    account: require('./classes/account'),
 }
