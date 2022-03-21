@@ -1,6 +1,6 @@
 {
   "name": "dashamail",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Software Development Kit for DashaMail",
   "main": "dashaMail.js",
   "scripts": {

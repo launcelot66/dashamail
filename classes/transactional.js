@@ -349,6 +349,8 @@ class Transactional extends DashaMail {
             if (!CObject.get(headers, 'From')) return reject('headers.From not set');
 
             this.setMethod('send');
+            // ignore unsubscribe by default for transactional email send
+            this.setIgnoreUnsubscribe(true);
             const body = new URLSearchParams();
             body.set('to', this.getTo());
             body.set('message', this.getMessage());

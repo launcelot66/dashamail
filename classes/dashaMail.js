@@ -7,31 +7,6 @@ const CObject = require("./CObject");
  */
 class DashaMail {
     /**
-     * DashaMail's API host
-     * @protected
-     * @type {string}
-     */
-    host = 'https://api.dashamail.com';
-    /**
-     * DashaMail's API apiKey
-     * @protected
-     * @type {string|null}
-     */
-    apiKey = null;
-    /**
-     * DashaMail's response format: json|jsonb|xml
-     * @protected
-     * @enum {Format}
-     */
-    format = Format.json;
-    /**
-     * DashaMail's method
-     * @protected
-     * @type {string|null}
-     */
-    method = null;
-
-    /**
      * Update/Set apiKey
      * @public
      * @param {string} apiKey
@@ -47,7 +22,7 @@ class DashaMail {
      * @returns {string|null}
      */
     getApiKey() {
-        return this.apiKey;
+        return CObject.get(this, 'apiKey');
     }
 
     /**
@@ -57,8 +32,32 @@ class DashaMail {
      * @returns {this}
      */
     setHost(host) {
-        if (host) this.host = host;
+        if (host && typeof host === 'string') this.host = host;
         return this;
+    }
+
+    /**
+     * @public
+     * @returns {string|*}
+     */
+    getHost() {
+        return CObject.get(this, 'host', 'https://api.dashamail.com');
+    }
+
+    /**
+     * @param {Format} format
+     * @returns {DashaMail}
+     */
+    setFormat(format) {
+        if (format && Object.keys(Format).indexOf(format) !== -1) this.format = format;
+        return this;
+    }
+
+    /**
+     * @returns {Format}
+     */
+    getFormat() {
+        return CObject.get(this, 'format', Format.json);
     }
 
     /**
@@ -77,7 +76,45 @@ class DashaMail {
      * @returns {string|null}
      */
     getMethod() {
-        return this.method;
+        return CObject.get(this, 'method');
+    }
+
+    /**
+     * Update request timeout
+     *
+     * @param timeout
+     * @returns {DashaMail}
+     */
+    setTimeout(timeout) {
+        if (timeout >= 0) this.timeout = timeout;
+        return this;
+    }
+
+    /**
+     * @returns {number}
+     */
+    getTimeout() {
+        return CObject.get(this, 'timeout', 5000);
+    }
+
+    /**
+     * For ignoring unsubscribe from emails
+     *
+     * @param ignore
+     * @returns {this}
+     */
+    setIgnoreUnsubscribe(ignore) {
+        this.ignoreUnsubscribe = ignore;
+
+        return this;
+    }
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    getIgnoreUnsubscribe() {
+        return CObject.get(this, 'ignoreUnsubscribe', false)
     }
 
 
@@ -89,12 +126,14 @@ class DashaMail {
     request(body) {
         return new Promise((resolve, reject) => {
             if (!this.apiKey) return reject('apiKey not set');
+            if (!this.getMethod()) return reject('method not set');
             body.set('api_key', this.getApiKey());
             body.set('method', this.getMethod());
-            body.set('format', this.format);
+            body.set('format', this.getFormat());
             const headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'};
+            if (this.getIgnoreUnsubscribe()) Object.assign(headers, {'X-Dashamail-Unsub-Ignore': true});
             axios
-                .post(this.host, body, {headers})
+                .post(this.getHost(), body, {headers, timeout: this.getTimeout()})
                 .then(response => {
                     if (response.status === 200) {
                         const status = CObject.get(response.data, 'response.msg.text');
@@ -108,5 +147,7 @@ class DashaMail {
         });
     }
 }
+
+DashaMail.prototype.name = 'dashamail';
 
 module.exports = DashaMail;

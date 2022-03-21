@@ -95,7 +95,7 @@ describe('DashaMail.transactional', () => {
             expect(plain_text).toEqual(transactional.getPlainText());
         });
 
-        it('should return error "to not set"', async () => {
+        it('error "to not set"', async () => {
             await new DashaMailTransactional()
                 .send()
                 .catch(error => expect('to not set').toEqual(error));
@@ -125,7 +125,7 @@ describe('DashaMail.transactional', () => {
                 .catch(error => expect('headers.Subject not set').toEqual(error));
         });
 
-        it('should return error "headers.From not set"', async () => {
+        it('error "headers.From not set"', async () => {
             await new DashaMailTransactional()
                 .setTo(config.get('to'), config.get('toName'))
                 .setMessage(config.get('message'))
@@ -134,7 +134,7 @@ describe('DashaMail.transactional', () => {
                 .catch(error => expect('headers.From not set').toEqual(error));
         });
 
-        it('should return error "apiKey not set"', async () => {
+        it('error "apiKey not set"', async () => {
             await new DashaMailTransactional()
                 .setTo(config.get('to'), config.get('toName'))
                 .setFrom(config.get('from'), config.get('fromName'))
@@ -146,7 +146,7 @@ describe('DashaMail.transactional', () => {
     });
 
     describe('check', () => {
-        it('should return error "apiKey not set"', async () => {
+        it('error "apiKey not set"', async () => {
             await new DashaMailTransactional()
                 .check('test')
                 .catch(error => expect(error).toEqual('apiKey not set'));
@@ -154,7 +154,7 @@ describe('DashaMail.transactional', () => {
     });
 
     describe('get_log', () => {
-        it('should return error "apiKey not set"', () => {
+        it('error "apiKey not set"', () => {
             new DashaMailTransactional()
                 .get_log()
                 .catch(error => expect(error).toEqual('apiKey not set'));
