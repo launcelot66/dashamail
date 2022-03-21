@@ -4,8 +4,9 @@
   "description": "Software Development Kit for DashaMail",
   "main": "dashaMail.js",
   "scripts": {
-    "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
+    "test": "jest -o tests/unit",
+    "test:watch": "npm run test --watch",
+    "e2e": "jest -o tests/e2e"
   },
   "repository": {
     "type": "git",

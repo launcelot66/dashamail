@@ -1,11 +1,11 @@
-const DashaMailAccount = require('../classes/account');
+const DashaMailLists = require('../../classes/lists');
 const config = require('config');
 
 describe('DashaMail.lists', () => {
     it('add_member', async () => {
-        await new DashaMailAccount()
+        await new DashaMailLists()
             .setApiKey(config.get('apiKey'))
-            .get_balance()
+            .add_member(config.get('apiKey'), config.get('to'))
             .then()
             .catch()
     });
