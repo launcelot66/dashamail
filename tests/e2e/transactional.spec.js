@@ -1,6 +1,5 @@
 const DashaMailTransactional = require('../../classes/transactional');
 const config = require('config');
-const CObject = require('../../classes/CObject');
 /** @type {string} */
 let successTransactionId;
 
@@ -33,7 +32,6 @@ describe('DashaMail.transactional', () => {
         await new DashaMailTransactional()
             .setApiKey(config.get('apiKey'))
             .get_log()
-            .then(data => expect(CObject.get(data, 'response.data', []).length)
-                .toBeGreaterThan(0));
+            .then(items => expect(items.length).toBeGreaterThan(0));
     });
 });

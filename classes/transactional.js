@@ -390,7 +390,7 @@ class Transactional extends DashaMail {
      *
      * @param {number|null} start what position to start from
      * @param {number|null} limit how much to output
-     * @returns {Promise<unknown>|Promise<*>}
+     * @returns {Promise<object[]|string>} List of object or reject with error string
      */
     get_log(start = null, limit= null) {
         this.setMethod('get_log');
@@ -403,7 +403,12 @@ class Transactional extends DashaMail {
         if (start >= 0) body.set('start', start + '');
         if (limit > 0) body.set('limit', limit + '');
 
-        return this.request(body);
+        return new Promise((resolve, reject) => {
+            this.request(body).then(
+                data => resolve(CObject.get(data, 'response.data', [])),
+                error => reject(error)
+            );
+        });
     }
 }
 
