@@ -1,5 +1,5 @@
 const Format = require('./format');
-const axios = require("axios").default;
+const https = require('https');
 const CObject = require("./CObject");
 /**
  * Software Development Kit for DashaMail
@@ -41,7 +41,7 @@ class DashaMail {
      * @returns {string|*}
      */
     getHost() {
-        return CObject.get(this, 'host', 'https://api.dashamail.com');
+        return CObject.get(this, 'host', 'api.dashamail.com');
     }
 
     /**
@@ -130,20 +130,35 @@ class DashaMail {
             body.set('api_key', this.getApiKey());
             body.set('method', this.getMethod());
             body.set('format', this.getFormat());
-            const headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'};
+
+            const headers = {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'Content-Length': Buffer.byteLength(body.toString())
+            };
             if (this.getIgnoreUnsubscribe()) Object.assign(headers, {'X-Dashamail-Unsub-Ignore': true});
-            axios
-                .post(this.getHost(), body, {headers, timeout: this.getTimeout()})
-                .then(response => {
-                    if (response.status === 200) {
-                        const status = CObject.get(response.data, 'response.msg.text');
-                        if (status && status !== 'OK') return reject(status);
-                        else return resolve(response.data);
+
+            const options = {host: this.getHost(), method: 'POST', timeout: this.getTimeout(), headers}
+
+            const request = https.request(options, res => {
+                let body = '';
+                res.on('data', chunk => body += chunk);
+                res.on('end',  () => {
+                    try {
+                        body = JSON.parse(body);
+                    } catch (e) {
+                        if (this.getFormat() !== 'xml') return reject(e);
                     }
-                    return reject(response.data);
-                }, error => {
-                    return reject(error);
+                    if (res.statusCode === 200) {
+                        const status = CObject.get(body, 'response.msg.text');
+                        if (status && status !== 'OK') return reject(status);
+                        else return resolve(body);
+                    }
+                    return reject(body);
                 });
+            })
+            request.write(body.toString());
+            request.end();
+            request.on('error', e => reject(e));
         });
     }
 }
