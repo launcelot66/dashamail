@@ -1,11 +1,22 @@
+![version](https://img.shields.io/npm/v/dashamail)
+![npm](https://img.shields.io/node/v/dashamail)
+![npm](https://img.shields.io/npm/l/dashamail)
+![npm](https://img.shields.io/npm/dm/dashamail)
+![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/dashamail)
+[![Donate](https://img.shields.io/badge/donate-QIWI-red)](https://qiwi.com/n/OVENT628)
+[![Donate](https://img.shields.io/badge/donate-YooMoney-red)](https://yoomoney.ru/to/410015710489385)
+
 # DashaMail
 Software Development Kit for DashaMail
 
 ## Install
-
 ### npm
 ```bash
 npm i --save dashamail
+```
+### yarn
+```bash
+yarn add dashamail
 ```
 
 ## Use
@@ -70,3 +81,9 @@ new Transactional()
         errorString => {/* Do something with errorString */}
     );
 ```
+
+# Author
+[![Nikita Sereda](https://github-readme-stackoverflow.vercel.app/?userID=7103430&theme=dark)](https://stackoverflow.com/users/7103430/Никита-Середа)
+
+## Contacts:
+[VK](https://vk.com/ng_new) | [Telegram](https://t.me/Lanselot66)
