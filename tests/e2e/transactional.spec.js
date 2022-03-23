@@ -13,6 +13,7 @@ describe('DashaMail.transactional', () => {
             .setMessage(config.get('message'))
             .setSubject(config.get('subject'))
             .setReplaces(config.get('replace'))
+            .setNoTrackClicks(true) // for check default url
             .send()
             .then(transactionalId => {
                 successTransactionId = transactionalId;
