@@ -1,6 +1,6 @@
 ![version](https://img.shields.io/npm/v/dashamail)
 ![npm](https://img.shields.io/node/v/dashamail)
-[![Donate](https://img.shields.io/badge/dependencies-0-lightGreen)](https://yoomoney.ru/to/410015710489385)
+![Donate](https://img.shields.io/badge/dependencies-0-lightGreen)
 ![npm](https://img.shields.io/npm/dm/dashamail)
 ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/dashamail)
 [![Donate](https://img.shields.io/badge/donate-QIWI-red)](https://qiwi.com/n/OVENT628)
