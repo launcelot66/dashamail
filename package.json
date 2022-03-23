@@ -8,20 +8,13 @@
     "test:watch": "npm run test --watch",
     "e2e": "jest -o tests/e2e"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/launcelot66/dashamail.git"
-  },
+  "repository": "https://github.com/launcelot66/dashamail.git",
   "keywords": [
     "dashamail",
     "dashamail sdk",
     "sdk"
   ],
-  "author": {
-    "email": "lanselot96@gmail.com",
-    "name": "Sereda Nikita",
-    "url": "https://github.com/launcelot66"
-  },
+  "author": "Sereda Nikita <lanselot96@gmail.com> (https://github.com/launcelot66)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/launcelot66/dashamail/issues"
