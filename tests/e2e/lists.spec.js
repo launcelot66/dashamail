@@ -3,10 +3,18 @@ const config = require('config');
 
 describe('DashaMail.lists', () => {
     it('add_member', async () => {
-        await new DashaMailLists()
+        const response = await new DashaMailLists()
             .setApiKey(config.get('apiKey'))
-            .add_member(config.get('apiKey'), config.get('to'))
+            .add_member(
+                config.get('list_id'),
+                config.get('to'),
+                'n',
+                true,
+                false,
+                config.get('merges')
+            )
             .then()
             .catch()
+        expect(parseInt(response.response.data.member_id)).toBeGreaterThan(0);
     });
 });

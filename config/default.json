@@ -13,5 +13,9 @@
   "plain_text": "plain text",
   "replace": {
     "KEY": "VALUE"
-  }
+  },
+  "merges": {
+    "merge_1": "VALUE"
+  },
+  "list_id": 0
 }
