@@ -34,16 +34,17 @@ class Lists extends DashaMail {
         if (no_check) body.set('no_check', no_check.toString());
         if (merges) {
             let keys = [];
-            if (merges instanceof Object && Object.keys(merges) > 0) {
-                keys = Object.keys(merges);
+            if (merges instanceof Object && Object.keys(merges).length > 0) {
+                keys = Object.keys(Object.assign({}, merges));
             } else if (merges instanceof Array && merges.length > 0) {
                 keys = merges.keys();
             }
-            for (let key of keys)
-                if (key.indexOf('merge_') !== -1)
-                    body.set('key', merges[key]);
+            for (let key of keys) {
+                if (key.indexOf('merge_') !== -1) {
+                    body.set(key, merges[key]);
+                }
+            }
         }
-
         return this.request(body);
     }
 }
